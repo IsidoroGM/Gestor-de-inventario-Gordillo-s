@@ -8,11 +8,10 @@
 		<version>4.1.0</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.gordillos</groupId>
-	<artifactId>inventario-backend</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name/>
-	<description/>
+	<groupId>com.invault</groupId>
+	<artifactId>invault-backend</artifactId>
+	<name>InVault Backend</name>
+	<description>Backend for InVault inventory management application</description>
 	<url/>
 	<licenses>
 		<license/>
@@ -30,6 +29,12 @@
 		<java.version>25</java.version>
 	</properties>
 	<dependencies>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>

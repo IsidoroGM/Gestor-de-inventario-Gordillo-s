@@ -1,11 +1,11 @@
 spring:
   application:
-    name: inventario-backend
+    name: invault-backend
 
   datasource:
-    url: jdbc:mysql://localhost:3306/gordillos_inventario_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Europe/Madrid
-    username: admin_Gordillos
-    password: gordillos2026!
+    url: jdbc:mysql://localhost:3306/invault_inventory_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Europe/Madrid
+    username: invault_admin
+    password: invault2026!
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:

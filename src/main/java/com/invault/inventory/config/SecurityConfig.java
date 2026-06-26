@@ -7,24 +7,34 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
 
-
-
+/**
+ * Temporary security configuration for the API.
+ * For now, only /api/health is public and the rest of the API remains protected.
+ */
 @Configuration
 public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
+                // Enables CORS support using the CorsConfig bean.
+                .cors(Customizer.withDefaults())
+
+                // CSRF is disabled because this backend will expose a stateless REST API.
                 .csrf(AbstractHttpConfigurer::disable)
+
+                // Defines which endpoints are public and which require authentication.
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/health").permitAll()
                         .anyRequest().authenticated()
                 )
+
+                // Temporary authentication mechanisms while JWT is not implemented.
                 .httpBasic(Customizer.withDefaults())
                 .formLogin(Customizer.withDefaults())
+
                 .build();
     }
-
 }
 
 

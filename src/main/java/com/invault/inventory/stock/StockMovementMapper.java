@@ -1,5 +1,7 @@
 package com.invault.inventory.stock;
 
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
 import com.invault.inventory.batches.Batch;
@@ -56,6 +58,22 @@ public class StockMovementMapper {
                 stockMovement.getReason(),
                 stockMovement.getMovementDate()
         );
+    }
+
+    /**
+     * Converts a list of StockMovement entities into a list of StockMovementResponseDTO objects.
+     *
+     * @param stockMovements list of entities from the database
+     * @return list of response DTOs ready to be sent to the client
+     */
+    public List<StockMovementResponseDTO> toResponseDTOList(List<StockMovement> stockMovements) {
+        if (stockMovements == null) {
+            return List.of();
+        }
+
+        return stockMovements.stream()
+                .map(this::toResponseDTO)
+                .toList();
     }
 }
 

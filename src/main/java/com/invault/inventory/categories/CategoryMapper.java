@@ -1,5 +1,7 @@
 package com.invault.inventory.categories;
 
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
 import com.invault.inventory.categories.dto.CategoryRequestDTO;
@@ -76,6 +78,22 @@ public class CategoryMapper {
         if (requestDTO.getActive() != null) {
             category.setActive(requestDTO.getActive());
         }
+    }
+
+    /**
+     * Converts a list of Category entities into a list of CategoryResponseDTO objects.
+     *
+     * @param categories list of entities from the database
+     * @return list of response DTOs ready to be sent to the client
+     */
+    public List<CategoryResponseDTO> toResponseDTOList(List<Category> categories) {
+        if (categories == null) {
+            return List.of();
+        }
+
+        return categories.stream()
+                .map(this::toResponseDTO)
+                .toList();
     }
 }
 

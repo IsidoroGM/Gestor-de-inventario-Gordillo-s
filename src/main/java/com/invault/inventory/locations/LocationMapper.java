@@ -1,5 +1,7 @@
 package com.invault.inventory.locations;
 
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
 import com.invault.inventory.locations.dto.LocationRequestDTO;
@@ -76,6 +78,22 @@ public class LocationMapper {
         if (requestDTO.getActive() != null) {
             location.setActive(requestDTO.getActive());
         }
+    }
+
+    /**
+     * Converts a list of Location entities into a list of LocationResponseDTO objects.
+     *
+     * @param locations list of entities from the database
+     * @return list of response DTOs ready to be sent to the client
+     */
+    public List<LocationResponseDTO> toResponseDTOList(List<Location> locations) {
+        if (locations == null) {
+            return List.of();
+        }
+
+        return locations.stream()
+                .map(this::toResponseDTO)
+                .toList();
     }
 }
 

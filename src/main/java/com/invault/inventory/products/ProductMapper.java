@@ -1,5 +1,7 @@
 package com.invault.inventory.products;
 
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
 import com.invault.inventory.categories.Category;
@@ -125,6 +127,22 @@ public class ProductMapper {
         if (requestDTO.getActive() != null) {
             product.setActive(requestDTO.getActive());
         }
+    }
+
+    /**
+     * Converts a list of Product entities into a list of ProductResponseDTO objects.
+     *
+     * @param products list of entities from the database
+     * @return list of response DTOs ready to be sent to the client
+     */
+    public List<ProductResponseDTO> toResponseDTOList(List<Product> products) {
+        if (products == null) {
+            return List.of();
+        }
+
+        return products.stream()
+                .map(this::toResponseDTO)
+                .toList();
     }
 }
 

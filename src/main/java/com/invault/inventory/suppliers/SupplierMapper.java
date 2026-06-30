@@ -1,5 +1,7 @@
 package com.invault.inventory.suppliers;
 
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
 import com.invault.inventory.suppliers.dto.SupplierRequestDTO;
@@ -85,6 +87,22 @@ public class SupplierMapper {
         if (requestDTO.getActive() != null) {
             supplier.setActive(requestDTO.getActive());
         }
+    }
+
+    /**
+     * Converts a list of Supplier entities into a list of SupplierResponseDTO objects.
+     *
+     * @param suppliers list of entities from the database
+     * @return list of response DTOs ready to be sent to the client
+     */
+    public List<SupplierResponseDTO> toResponseDTOList(List<Supplier> suppliers) {
+        if (suppliers == null) {
+            return List.of();
+        }
+
+        return suppliers.stream()
+                .map(this::toResponseDTO)
+                .toList();
     }
 }
 

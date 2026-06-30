@@ -1,5 +1,7 @@
 package com.invault.inventory.batches;
 
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
 import com.invault.inventory.batches.dto.BatchRequestDTO;
@@ -96,6 +98,22 @@ public class BatchMapper {
         if (requestDTO.getStatus() != null) {
             batch.setStatus(requestDTO.getStatus());
         }
+    }
+
+    /**
+     * Converts a list of Batch entities into a list of BatchResponseDTO objects.
+     *
+     * @param batches list of entities from the database
+     * @return list of response DTOs ready to be sent to the client
+     */
+    public List<BatchResponseDTO> toResponseDTOList(List<Batch> batches) {
+        if (batches == null) {
+            return List.of();
+        }
+
+        return batches.stream()
+                .map(this::toResponseDTO)
+                .toList();
     }
 }
 

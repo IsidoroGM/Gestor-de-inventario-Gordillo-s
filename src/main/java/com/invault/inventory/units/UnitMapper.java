@@ -1,5 +1,7 @@
 package com.invault.inventory.units;
 
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
 import com.invault.inventory.units.dto.UnitRequestDTO;
@@ -82,6 +84,22 @@ public class UnitMapper {
         if (requestDTO.getActive() != null) {
             unit.setActive(requestDTO.getActive());
         }
+    }
+
+    /**
+     * Converts a list of Unit entities into a list of UnitResponseDTO objects.
+     *
+     * @param units list of entities from the database
+     * @return list of response DTOs ready to be sent to the client
+     */
+    public List<UnitResponseDTO> toResponseDTOList(List<Unit> units) {
+        if (units == null) {
+            return List.of();
+        }
+
+        return units.stream()
+                .map(this::toResponseDTO)
+                .toList();
     }
 }
 
